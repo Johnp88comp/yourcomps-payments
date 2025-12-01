@@ -20,13 +20,19 @@
   </nav>
 </header>
 
+<!-- HERO SECTION -->
+<section class="hero">
+  <h2>Create Your Competition</h2>
+  <p>Set up your competition and start selling tickets in just a few steps.</p>
+  <a href="create-competition.html" class="btn">Create Competition</a>
+</section>
+
 <main>
-  <h2>Create a Competition</h2>
-  <p>Here you can create a new competition and set ticket prices.</p>
+  <h3>Competition Details</h3>
   <form>
-    <label>Item Name: <input type="text" name="item"></label><br><br>
-    <label>Ticket Price: <input type="number" name="price"></label><br><br>
-    <label>Maximum Tickets: <input type="number" name="max"></label><br><br>
+    <label>Item Name:<br><input type="text" name="item" required></label><br><br>
+    <label>Ticket Price (£):<br><input type="number" name="price" required></label><br><br>
+    <label>Maximum Tickets:<br><input type="number" name="max" required></label><br><br>
     <button type="submit">Create Competition</button>
   </form>
 </main>
