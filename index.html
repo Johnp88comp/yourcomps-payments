@@ -8,32 +8,46 @@
 </head>
 <body>
 
-<header>
-  <h1>YourComps</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="create-competition.html">Start Competition</a>
-  </nav>
-</header>
+  <!-- Header / Navigation -->
+  <header>
+    <h1>YourComps</h1>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="create-competition.html">Start Competition</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h2>Win Amazing Prizes!</h2>
-  <p>Create your competitions, sell tickets, and let the platform handle the draw for you.</p>
-  <a href="create-competition.html" class="btn">Start a Competition</a>
-</section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Win Amazing Prizes!</h2>
+    <p>Create your competitions, sell tickets, and let the platform handle the draw for you.</p>
+    <a href="create-competition.html" class="btn">Start a Competition</a>
+  </section>
 
-<main>
-  <h3>How It Works</h3>
-  <ol>
-    <li>Create a competition for your item.</li>
-    <li>Set ticket price and max tickets.</li>
-    <li>Sell tickets and automatically draw a winner.</li>
-  </ol>
-</main>
+  <!-- Optional content below the hero -->
+  <main>
+    <section class="features">
+      <h3>Why Choose YourComps?</h3>
+      <ul>
+        <li>Easy competition setup</li>
+        <li>Secure ticket sales</li>
+        <li>Instant winner selection</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- JavaScript for mobile menu -->
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
