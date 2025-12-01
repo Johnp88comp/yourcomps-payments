@@ -111,16 +111,18 @@ nav a:hover {
         display: block;
     }
 
-    nav {
-        display: none;
-        flex-direction: column;
-        background: black;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        padding: 10px;
-    }
+nav {
+  display: none;
+  flex-direction: column;
+  background: black;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 200px;
+  padding: 10px;
+  z-index: 10; /* <-- FIX */
+}
+
 
     nav a {
         margin: 10px 0;
