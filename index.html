@@ -4,36 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YourComps - Home</title>
+
   <style>
     body { margin: 0; font-family: Arial, sans-serif; }
-    header { background: black; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
-    header h1 { margin: 0; font-size: 1.5em; }
-    .menu-toggle { display: none; font-size: 2em; background: none; border: none; color: white; cursor: pointer; }
-    nav { display: flex; }
-    nav a { margin-left: 15px; color: white; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .hero { background: #222; color: white; text-align: center; padding: 100px 20px; }
-    .hero h2 { font-size: 2.5em; margin-bottom: 15px; }
-    .hero p { font-size: 1.2em; margin-bottom: 20px; }
-    .hero .btn { display: inline-block; background: #ff6600; color: white; text-decoration: none; padding: 15px 25px; border-radius: 5px; font-weight: bold; }
-    .hero .btn:hover { background: #e55b00; }
-    @media screen and (max-width: 768px) {
-      .menu-toggle { display: block; }
-      nav { display: none; flex-direction: column; background: black; position: absolute; top: 60px; right: 0; width: 200px; padding: 10px; }
-      nav a { margin: 10px 0; }
-      nav.active { display: flex; }
-      .hero { padding: 70px 20px; }
-      .hero h2 { font-size: 2em; }
-      .hero p { font-size: 1em; }
+
+    /* HEADER */
+    header {
+      background: black;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    h1 { margin: 0; }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* HAMBURGER BUTTON */
+    .menu-toggle {
+      display: none;
+      font-size: 30px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* MOBILE STYLES */
+    @media(max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: black;
+        width: 200px;
+        display: none;
+        padding: 15px;
+      }
+
+      nav.active {
+        display: flex;
+      }
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: #222;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      background: orange;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>YourComps</h1>
+
+  <!-- Hamburger menu -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav>
+
+  <!-- Navigation -->
+  <nav id="mobileNav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
@@ -45,15 +120,14 @@
 
 <section class="hero">
   <h2>Win Amazing Prizes!</h2>
-  <p>Create your competitions, sell tickets, and let the platform handle the draw for you.</p>
-  <a href="create-competition.html" class="btn">Start a Competition</a>
+  <p>Create competitions, sell tickets, and let us handle the draw.</p>
+  <a href="create-competition.html" class="btn">Start Competition</a>
 </section>
 
 <script>
-function toggleMenu() {
-  const nav = document.querySelector('header nav');
-  nav.classList.toggle('active');
-}
+  function toggleMenu() {
+    document.getElementById("mobileNav").classList.toggle("active");
+  }
 </script>
 
 </body>
