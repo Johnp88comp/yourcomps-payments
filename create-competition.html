@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Competition - YourComps</title>
-<link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Competition - YourComps</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
 <header>
   <h1>YourComps</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -18,19 +20,17 @@
     <a href="create-competition.html">Start Competition</a>
   </nav>
 </header>
+
 <section class="hero">
-  <h2>Create Your Competition</h2>
-  <p>Set up your competition and start selling tickets in just a few steps.</p>
-  <a href="create-competition.html" class="btn">Create Competition</a>
+  <h2>Create a Competition</h2>
+  <p>Enter competition details here (form coming soon).</p>
 </section>
-<main>
-  <h3>Competition Details</h3>
-  <form>
-    <label>Item Name:<br><input type="text" name="item" required></label><br><br>
-    <label>Ticket Price (£):<br><input type="number" name="price" required></label><br><br>
-    <label>Maximum Tickets:<br><input type="number" name="max" required></label><br><br>
-    <button type="submit">Create Competition</button>
-  </form>
-</main>
+
+<script>
+function toggleMenu() {
+  document.querySelector("nav").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>

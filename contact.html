@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact - YourComps</title>
-<link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - YourComps</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
 <header>
   <h1>YourComps</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -18,13 +20,17 @@
     <a href="create-competition.html">Start Competition</a>
   </nav>
 </header>
+
 <section class="hero">
   <h2>Contact Us</h2>
-  <p>Get in touch with our team for support or inquiries.</p>
+  <p>Email us at support@yourcomps.com and we’ll get back to you soon.</p>
 </section>
-<main>
-  <h3>Contact Info</h3>
-  <p>Email: support@yourcomps.com</p>
-</main>
+
+<script>
+function toggleMenu() {
+  document.querySelector("nav").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>

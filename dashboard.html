@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - YourComps</title>
-<link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - YourComps</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
 <header>
   <h1>YourComps</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -18,13 +20,17 @@
     <a href="create-competition.html">Start Competition</a>
   </nav>
 </header>
+
 <section class="hero">
-  <h2>Welcome to Your Dashboard</h2>
-  <p>Here you can view all your competitions, manage tickets, and track winners.</p>
+  <h2>Your Dashboard</h2>
+  <p>Here you will manage competitions (coming soon).</p>
 </section>
-<main>
-  <h3>Your Competitions</h3>
-  <p>No competitions yet. Click "Start Competition" to create your first one.</p>
-</main>
+
+<script>
+function toggleMenu() {
+  document.querySelector("nav").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
