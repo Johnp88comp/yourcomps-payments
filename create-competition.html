@@ -6,12 +6,17 @@
   <title>Create Competition - YourComps</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
 <header>
   <h1>YourComps</h1>
+
+  <!-- Hamburger Menu Button -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav>
+
+  <!-- Navigation -->
+  <nav id="mobileNav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
@@ -27,9 +32,9 @@
 </section>
 
 <script>
-function toggleMenu() {
-  document.querySelector("nav").classList.toggle("active");
-}
+  function toggleMenu() {
+    document.getElementById("mobileNav").classList.toggle("active");
+  }
 </script>
 
 </body>

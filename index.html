@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YourComps - Home</title>
 
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
     /* HEADER */
     header {
-      background: black;
-      color: white;
+      background: #000;
+      color: #fff;
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
@@ -19,16 +22,18 @@
       position: relative;
     }
 
-    h1 { margin: 0; }
+    header h1 {
+      margin: 0;
+    }
 
-    /* NAVIGATION */
+    /* NAV */
     nav {
       display: flex;
       gap: 15px;
     }
 
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
@@ -37,30 +42,30 @@
       text-decoration: underline;
     }
 
-    /* HAMBURGER BUTTON */
+    /* BURGER */
     .menu-toggle {
       display: none;
       font-size: 30px;
       background: none;
       border: none;
-      color: white;
+      color: #fff;
       cursor: pointer;
     }
 
-    /* MOBILE STYLES */
-    @media(max-width: 768px) {
+    /* MOBILE */
+    @media (max-width: 768px) {
       .menu-toggle {
         display: block;
       }
 
       nav {
+        display: none;
         flex-direction: column;
+        background: #000;
         position: absolute;
         top: 60px;
         right: 0;
-        background: black;
         width: 200px;
-        display: none;
         padding: 15px;
       }
 
@@ -69,29 +74,29 @@
       }
     }
 
-    /* HERO SECTION */
+    /* HERO */
     .hero {
-      padding: 80px 20px;
       text-align: center;
+      padding: 80px 20px;
       background: #222;
-      color: white;
+      color: #fff;
     }
 
     .hero h2 {
-      font-size: 2.5em;
       margin-bottom: 10px;
+      font-size: 2.5em;
     }
 
     .hero p {
-      font-size: 1.2em;
       margin-bottom: 20px;
+      font-size: 1.2em;
     }
 
     .btn {
       display: inline-block;
-      padding: 15px 25px;
       background: orange;
-      color: white;
+      padding: 15px 25px;
+      color: #fff;
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
@@ -104,10 +109,8 @@
 <header>
   <h1>YourComps</h1>
 
-  <!-- Hamburger menu -->
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <!-- Navigation -->
   <nav id="mobileNav">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
