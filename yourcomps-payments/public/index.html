@@ -3,34 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YourComps - Home</title>
+  <title>YourComps Payments</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <header>
-  <h1>YourComps</h1>
+  <h1>YourComps Payments</h1>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="create-competition.html">Start Competition</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="paypal.html">PayPal</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h2>Win Amazing Prizes!</h2>
-  <p>Create competitions, sell tickets, and let the platform handle the draw.</p>
-  <a href="create-competition.html" class="btn">Start a Competition</a>
+  <h2>Pay for Your Competition Tickets</h2>
+  <p>Choose a payment option below to complete your purchase safely and securely.</p>
+  <a href="checkout.html" class="btn">Pay with Card (Stripe)</a>
+  <a href="paypal.html" class="btn">Pay with PayPal</a>
 </section>
 
 <script>
-function toggleMenu() {
-  document.querySelector("nav").classList.toggle("active");
-}
+  function toggleMenu() {
+    document.querySelector('nav').classList.toggle('active');
+  }
 </script>
 
 </body>

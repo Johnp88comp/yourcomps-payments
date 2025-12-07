@@ -1,1 +1,43 @@
-{\rtf1}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayPal - YourComps Payments</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>YourComps Payments</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="paypal.html">PayPal</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Pay with PayPal</h2>
+  <p>Click the button below to pay securely using PayPal.</p>
+
+  <form id="paypal-form">
+    <button type="submit" class="btn">Pay with PayPal</button>
+  </form>
+</section>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('nav').classList.toggle('active');
+  }
+
+  const form = document.getElementById('paypal-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('This is a placeholder. Real PayPal integration goes here.');
+  });
+</script>
+
+</body>
+</html>

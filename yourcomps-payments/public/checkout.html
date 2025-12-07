@@ -1,1 +1,55 @@
-{\rtf1}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - YourComps Payments</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>YourComps Payments</h1>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="paypal.html">PayPal</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Checkout</h2>
+  <p>Enter your card details to pay securely using Stripe.</p>
+
+  <form id="payment-form">
+    <label for="name">Name on Card</label>
+    <input type="text" id="name" placeholder="Your Name" required>
+
+    <label for="card-number">Card Number</label>
+    <input type="text" id="card-number" placeholder="1234 1234 1234 1234" required>
+
+    <label for="expiry">Expiry Date</label>
+    <input type="text" id="expiry" placeholder="MM/YY" required>
+
+    <label for="cvc">CVC</label>
+    <input type="text" id="cvc" placeholder="123" required>
+
+    <button type="submit" class="btn">Pay Now</button>
+  </form>
+</section>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('nav').classList.toggle('active');
+  }
+
+  const form = document.getElementById('payment-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('This is a placeholder. Real Stripe integration goes here.');
+  });
+</script>
+
+</body>
+</html>

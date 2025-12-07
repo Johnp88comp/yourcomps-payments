@@ -1,0 +1,10 @@
+
+body { margin:0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+header { background: #111; color: #fff; padding: 15px 20px; display:flex; justify-content:space-between; align-items:center; }
+header h1 { margin:0; }
+nav a { color:#fff; margin-left:15px; text-decoration:none; font-weight:bold; }
+nav a:hover { text-decoration:underline; }
+.menu-toggle { display:none; font-size:2em; background:none; border:none; color:white; cursor:pointer; }
+@media(max-width:768px){ .menu-toggle{display:block;} nav{display:none; flex-direction:column; position:absolute; top:60px; right:0; background:#111; width:200px; padding:15px;} nav.active{display:flex;} }
+.hero { text-align:center; padding:80px 20px; background:#222; color:white; }
+.btn { display:inline-block; padding:15px 25px; background:orange; color:white; text-decoration:none; border-radius:5px; font-weight:bold; }
