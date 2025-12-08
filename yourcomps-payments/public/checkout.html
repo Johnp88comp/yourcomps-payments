@@ -6,31 +6,33 @@
   <title>Checkout - YourComps</title>
 </head>
 <body>
-  <h1>Secure Checkout</h1>
-  <p>You will be redirected to Stripe to complete payment.</p>
 
-  <button id="payBtn">Continue to Stripe Payment</button>
+<h1>Secure Checkout</h1>
+<p>You will be redirected to Stripe to complete your payment.</p>
 
-  <script>
-    document.getElementById("payBtn").addEventListener("click", async () => {
-      try {
-        const res = await fetch("/api/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({}),
-        });
+<button id="payButton">Continue to Stripe Payment</button>
 
-        const data = await res.json();
+<script>
+  document.getElementById("payButton").addEventListener("click", async () => {
+    try {
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({})
+      });
 
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          alert("Unable to start payment. Please try again.");
-        }
-      } catch (err) {
-        alert("Payment service unavailable.");
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Unable to start payment. Please try again.");
       }
-    });
-  </script>
+    } catch (err) {
+      alert("Payment service unavailable.");
+    }
+  });
+</script>
+
 </body>
 </html>
