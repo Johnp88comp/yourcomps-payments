@@ -1,56 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout – YourComps</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - YourComps</title>
 </head>
-
 <body>
+  <h1>Secure Checkout</h1>
+  <p>You will be redirected to Stripe to complete payment.</p>
 
-<header>
-  <h1>YourComps</h1>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="checkout.html">Checkout</a>
-    <a href="paypal.html">PayPal</a>
-  </nav>
-</header>
+  <button id="payBtn">Continue to Stripe Payment</button>
 
-<section class="hero">
-  <h2>Secure Checkout</h2>
-  <p>Complete your purchase using our secure payment provider.</p>
+  <script>
+    document.getElementById("payBtn").addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
 
-  <!-- ✅ THIS BUTTON IS CRITICAL -->
-  <button id="payBtn" class="btn">Continue to Stripe Payment</button>
-</section>
+        const data = await res.json();
 
-<script>
-  function toggleMenu() {
-    document.querySelector("nav").classList.toggle("active");
-  }
-
-  // ✅ REAL STRIPE CHECKOUT CALL
-  document.getElementById("payBtn").addEventListener("click", async () => {
-    try {
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST"
-      });
-
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Unable to start payment. Please try again.");
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert("Unable to start payment. Please try again.");
+        }
+      } catch (err) {
+        alert("Payment service unavailable.");
       }
-    } catch (error) {
-      alert("Payment service unavailable.");
-    }
-  });
-</script>
-
+    });
+  </script>
 </body>
 </html>
