@@ -2,36 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout - YourComps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Checkout – YourComps</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-<h1>Secure Checkout</h1>
-<p>You will be redirected to Stripe to complete your payment.</p>
+<header>
+  <h1>YourComps</h1>
+</header>
 
-<button id="payButton">Continue to Stripe Payment</button>
+<section class="hero">
+  <h2>Secure Checkout</h2>
+  <p>You’ll be redirected to Stripe to complete your payment.</p>
+
+  <button id="payBtn" class="btn">Continue to Stripe Payment</button>
+</section>
 
 <script>
-  document.getElementById("payButton").addEventListener("click", async () => {
-    try {
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({})
-      });
+document.getElementById("payBtn").addEventListener("click", async () => {
+  try {
+    const response = await fetch("/api/create-checkout-session", {
+      method: "POST"
+    });
 
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Unable to start payment. Please try again.");
-      }
-    } catch (err) {
-      alert("Payment service unavailable.");
-    }
-  });
+    const data = await response.json();
+    window.location.href = data.url;
+  } catch (err) {
+    alert("Unable to start payment. Please try again.");
+  }
+});
 </script>
 
 </body>
