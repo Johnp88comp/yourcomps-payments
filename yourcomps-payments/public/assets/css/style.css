@@ -1,200 +1,149 @@
-/* ===============================
-   YOURCOMPS – LUXURY STYLE SYSTEM
-   =============================== */
+/* ==============================
+   YourComps Prestige Design
+   ============================== */
 
 :root {
-  --bg-main: #0f1115;
-  --bg-card: #161922;
-  --bg-header: #0b0d12;
-  --text-main: #f5f6fa;
-  --text-muted: #9ca3af;
-  --accent-gold: #d4af37;
-  --accent-gold-soft: #bfa14a;
-  --border-soft: rgba(255,255,255,0.08);
+  --bg-dark: #0b0f14;
+  --bg-panel: rgba(255, 255, 255, 0.04);
+  --gold: #d4af37;
+  --gold-soft: #e9dfb4;
+  --text-main: #ffffff;
+  --text-muted: #aeb6c2;
+  --border-soft: rgba(255,255,255,0.12);
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, #0f1115 0%, #0a0c11 100%);
+  background:
+    radial-gradient(circle at top, #141b26 0%, #0b0f14 55%);
   color: var(--text-main);
+}
+
+/* ==============================
+   Header
+   ============================== */
+
+.site-header {
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* ==============================
+   Center Layout
+   ============================== */
+
+.page-center {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ==============================
+   Card
+   ============================== */
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.02)
+  );
+  border-radius: 18px;
+  padding: 42px 48px;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid var(--border-soft);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  text-align: center;
+}
+
+/* ==============================
+   Success Page
+   ============================== */
+
+.success-title {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--gold-soft);
+}
+
+.success-text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
   line-height: 1.6;
 }
 
-/* ===============================
-   HEADER / NAV
-   =============================== */
+/* ==============================
+   Buttons
+   ============================== */
 
-header {
-  background: var(--bg-header);
-  border-bottom: 1px solid var(--border-soft);
-  padding: 18px 28px;
+.button-group {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-
-header h1 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--accent-gold);
-}
-
-nav {
-  display: flex;
-  gap: 22px;
-}
-
-nav a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-nav a:hover {
-  color: var(--accent-gold);
-}
-
-/* ===============================
-   HAMBURGER (MOBILE)
-   =============================== */
-
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  background: none;
-  border: none;
-  color: var(--text-main);
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  nav {
-    display: none;
-    position: absolute;
-    right: 20px;
-    top: 70px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-soft);
-    border-radius: 10px;
-    padding: 16px;
-    flex-direction: column;
-    gap: 14px;
-    min-width: 180px;
-  }
-
-  nav.active {
-    display: flex;
-  }
-}
-
-/* ===============================
-   HERO
-   =============================== */
-
-.hero {
-  padding: 90px 20px 100px;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.hero h2 {
-  font-size: 2.6rem;
-  font-weight: 800;
-  margin-bottom: 14px;
-  background: linear-gradient(90deg, #f5f6fa, #d4af37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  margin-bottom: 36px;
-}
-
-/* ===============================
-   BUTTONS
-   =============================== */
 
 .btn {
   display: inline-block;
   padding: 14px 28px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
-  color: #0b0d12;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-  box-shadow: 0 8px 28px rgba(212,175,55,0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(212,175,55,0.35);
-}
-
-/* ===============================
-   FORMS (CHECKOUT)
-   =============================== */
-
-form {
-  max-width: 420px;
-  margin: 40px auto 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  padding: 28px;
-  border-radius: 14px;
-}
-
-label {
-  display: block;
-  font-size: 0.85rem;
-  margin-bottom: 6px;
-  color: var(--text-muted);
-}
-
-input {
-  width: 100%;
-  padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid var(--border-soft);
-  background: #0f1115;
-  color: var(--text-main);
-  margin-bottom: 18px;
+  font-weight: 600;
   font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
 }
 
-input:focus {
-  outline: none;
-  border-color: var(--accent-gold);
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #b9962e);
+  color: #000;
+  box-shadow: 0 10px 30px rgba(212,175,55,0.35);
 }
 
-/* ===============================
-   FOOTER (OPTIONAL)
-   =============================== */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(212,175,55,0.5);
+}
 
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+.btn-secondary:hover {
+  background: rgba(212,175,55,0.1);
+}
+
+/* ==============================
+   Mobile
+   ============================== */
+
+@media (max-width: 520px) {
+  .card {
+    padding: 32px 26px;
+  }
+
+  .success-title {
+    font-size: 1.6rem;
+  }
 }
