@@ -1,10 +1,200 @@
+/* ===============================
+   YOURCOMPS – LUXURY STYLE SYSTEM
+   =============================== */
 
-body { margin:0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
-header { background: #111; color: #fff; padding: 15px 20px; display:flex; justify-content:space-between; align-items:center; }
-header h1 { margin:0; }
-nav a { color:#fff; margin-left:15px; text-decoration:none; font-weight:bold; }
-nav a:hover { text-decoration:underline; }
-.menu-toggle { display:none; font-size:2em; background:none; border:none; color:white; cursor:pointer; }
-@media(max-width:768px){ .menu-toggle{display:block;} nav{display:none; flex-direction:column; position:absolute; top:60px; right:0; background:#111; width:200px; padding:15px;} nav.active{display:flex;} }
-.hero { text-align:center; padding:80px 20px; background:#222; color:white; }
-.btn { display:inline-block; padding:15px 25px; background:orange; color:white; text-decoration:none; border-radius:5px; font-weight:bold; }
+:root {
+  --bg-main: #0f1115;
+  --bg-card: #161922;
+  --bg-header: #0b0d12;
+  --text-main: #f5f6fa;
+  --text-muted: #9ca3af;
+  --accent-gold: #d4af37;
+  --accent-gold-soft: #bfa14a;
+  --border-soft: rgba(255,255,255,0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, #0f1115 0%, #0a0c11 100%);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ===============================
+   HEADER / NAV
+   =============================== */
+
+header {
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--accent-gold);
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--accent-gold);
+}
+
+/* ===============================
+   HAMBURGER (MOBILE)
+   =============================== */
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 16px;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 180px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+}
+
+/* ===============================
+   HERO
+   =============================== */
+
+.hero {
+  padding: 90px 20px 100px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, #f5f6fa, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+
+/* ===============================
+   BUTTONS
+   =============================== */
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+  color: #0b0d12;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 8px 28px rgba(212,175,55,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(212,175,55,0.35);
+}
+
+/* ===============================
+   FORMS (CHECKOUT)
+   =============================== */
+
+form {
+  max-width: 420px;
+  margin: 40px auto 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  padding: 28px;
+  border-radius: 14px;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: #0f1115;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+}
+
+/* ===============================
+   FOOTER (OPTIONAL)
+   =============================== */
+
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
