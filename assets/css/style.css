@@ -1,199 +1,160 @@
-/* ======================
-   GLOBAL STYLES
-====================== */
+/* ========= RESET ========= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #f8f8f8;
-  color: #333;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #0b0f14;
+  color: #eaeaea;
+  line-height: 1.6;
 }
 
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 600;
-}
-
-/* ======================
-   HEADER & NAVIGATION
-====================== */
+/* ========= HEADER ========= */
 header {
-  background: #111;
-  color: #fff;
-  padding: 15px 25px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, #0e141c, #0b0f14);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 16px 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  justify-content: space-between;
 }
 
 header h1 {
-  font-size: 1.8em;
-  color: #ffd700; /* gold accent */
+  font-size: 22px;
+  font-weight: 700;
+  color: #d4af37;
 }
 
 nav {
   display: flex;
-  gap: 20px;
+  gap: 18px;
 }
 
 nav a {
-  color: #fff;
+  color: #eaeaea;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s ease;
+  font-size: 14px;
+  opacity: 0.85;
 }
 
 nav a:hover {
-  color: #ffd700;
-  text-decoration: underline;
+  opacity: 1;
 }
 
-.menu-toggle {
-  display: none;
-  font-size: 2em;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* ======================
-   HERO SECTION
-====================== */
+/* ========= HERO ========= */
 .hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #222 0%, #000 100%);
-  color: #ffd700;
+  background:
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.85)),
+    url("https://images.unsplash.com/photo-1601597111158-2fceff292cdc?q=80&w=2000")
+    center / cover no-repeat;
 }
 
 .hero h2 {
-  font-size: 3em;
-  margin-bottom: 15px;
+  font-size: clamp(32px, 5vw, 52px);
+  color: #f5d76e;
+  margin-bottom: 12px;
 }
 
 .hero p {
-  font-size: 1.3em;
-  margin-bottom: 25px;
-}
-
-.hero .btn {
-  background: #ffd700;
-  color: #111;
-  text-decoration: none;
-  padding: 15px 30px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-.hero .btn:hover {
-  background: #e5c100;
-}
-
-/* ======================
-   COMPETITION FORM
-====================== */
-.competition-form {
   max-width: 700px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fff;
+  margin: 0 auto 24px;
+  color: #dcdcdc;
+}
+
+/* ========= BUTTONS ========= */
+.btn-cta {
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  color: #0b0f14;
+  padding: 12px 22px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 10px;
 }
 
-.competition-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
+.btn-outline {
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  padding: 12px 22px;
+  border-radius: 10px;
+  text-decoration: none;
 }
 
-.competition-form input,
-.competition-form textarea {
+/* ========= PAGE CONTENT ========= */
+.page-container {
+  padding: 60px 8%;
+}
+
+/* ========= CARDS ========= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: linear-gradient(180deg, #121821, #0d1218);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.45);
+}
+
+.card-img img {
   width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1em;
+  height: 200px;
+  object-fit: cover;
 }
 
-.competition-form button {
-  margin-top: 25px;
-  padding: 15px 30px;
-  background: #111;
-  color: #ffd700;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.1em;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s ease;
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 16px 6px;
+  color: #f5d76e;
 }
 
-.competition-form button:hover {
-  background: #333;
+.card-desc {
+  padding: 0 16px 14px;
+  font-size: 14px;
+  color: #cfcfcf;
 }
 
-/* ======================
-   PAYMENTS SECTION
-====================== */
-.payments {
-  max-width: 700px;
-  margin: 50px auto;
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.pill {
+  background: rgba(212,175,55,.15);
+  color: #f5d76e;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ========= FOOTER ========= */
+footer {
   text-align: center;
-}
-
-.payments h3 {
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  color: #111;
-}
-
-#stripe-button-container,
-#paypal-button-container {
-  margin-top: 15px;
-}
-
-/* ======================
-   MOBILE RESPONSIVE
-====================== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  nav {
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 220px;
-    background: #111;
-    display: none;
-    padding: 15px;
-    border-radius: 0 0 0 10px;
-  }
-
-  nav a {
-    margin: 10px 0;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
-  .hero {
-    padding: 70px 20px;
-  }
-
-  .hero h2 {
-    font-size: 2.2em;
-  }
-
-  .hero p {
-    font-size: 1em;
-  }
+  padding: 24px;
+  font-size: 13px;
+  opacity: 0.7;
 }
