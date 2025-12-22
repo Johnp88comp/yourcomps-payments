@@ -18,15 +18,12 @@
 <main class="page-center">
   <div class="card">
     <h2 class="card-title">Secure Checkout</h2>
+    <p id="summary" class="card-text"></p>
 
-    <p class="card-text" id="productText"></p>
+    <label>Number of tickets</label>
+    <input id="qty" type="number" min="1" value="1" />
 
-    <label style="margin-top:16px; display:block;">
-      Number of tickets
-      <input id="quantity" type="number" value="1" min="1" style="width:100%; padding:10px; margin-top:6px;">
-    </label>
-
-    <div class="button-group" style="margin-top:20px;">
+    <div class="button-group">
       <button id="payBtn" class="btn btn-primary">
         Continue to Stripe Payment
       </button>
@@ -40,31 +37,23 @@
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const name = params.get("name");
-const price = params.get("price"); // in pounds
+const title = params.get("title");
+const price = Number(params.get("price")); // pence
 
-document.getElementById("productText").textContent =
-  `${name} — £${price} per ticket`;
+document.getElementById("summary").textContent =
+  `${title} — £${(price / 100).toFixed(2)} per ticket`;
 
 document.getElementById("payBtn").addEventListener("click", async () => {
-  const quantity = document.getElementById("quantity").value;
+  const quantity = Number(document.getElementById("qty").value);
 
-  try {
-    const response = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        price,
-        quantity
-      })
-    });
+  const res = await fetch("/api/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, price, quantity }),
+  });
 
-    const data = await response.json();
-    window.location.href = data.url;
-  } catch {
-    alert("Unable to start payment. Please try again.");
-  }
+  const data = await res.json();
+  window.location.href = data.url;
 });
 </script>
 
