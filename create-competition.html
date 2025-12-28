@@ -11,7 +11,7 @@
 <header class="site-header">
   <h1 class="logo">YourComps</h1>
 
-  <button class="menu-toggle" aria-label="Toggle menu">
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
     ☰
   </button>
 
@@ -24,6 +24,7 @@
     <a href="create-competition.html">Start Competition</a>
   </nav>
 </header>
+
 
 
 <section class="hero">
@@ -62,11 +63,19 @@
 </footer>
 
 <script>
-function toggleMenu() {
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("menuToggle");
   const nav = document.getElementById("mobileNav");
-  nav.classList.toggle("active");
-}
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  }
+});
 </script>
+
+
 
 
 </body>
