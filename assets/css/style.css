@@ -25,10 +25,12 @@ body {
   background: linear-gradient(180deg, #0e141c, #0b0f14);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   padding: 16px 24px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 
 .logo {
   font-size: 22px;
@@ -177,15 +179,12 @@ body {
 
 /* ========= MOBILE NAV ========= */
 @media (max-width: 860px) {
-
-  /* show burger */
   .menu-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* force-hide desktop nav */
   #mobileNav {
     display: none;
     position: absolute;
@@ -197,10 +196,9 @@ body {
     padding: 12px;
     flex-direction: column;
     gap: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.6);
+    z-index: 999;
   }
 
-  /* open state */
   #mobileNav.active {
     display: flex;
   }
@@ -208,6 +206,7 @@ body {
   #mobileNav a {
     padding: 12px;
     border-radius: 10px;
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.05);
   }
 }
+
