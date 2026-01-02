@@ -39,25 +39,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
 
-  const title = params.get("title");
-  const pricePence = Number(params.get("pricePence"));
+  const title = params.get("title") || "Competition";
+  const pricePence = parseInt(params.get("pricePence"), 10) || 0;
 
-  const productLine = document.querySelector("#productLine");
-  const payBtn = document.querySelector("#payBtn");
-  const quantityInput = document.querySelector("#quantity");
+  const summary = document.getElementById("summary");
+  const qtyInput = document.getElementById("qty");
+  const payBtn = document.getElementById("payBtn");
 
-  if (!payBtn || !quantityInput) {
-    console.error("Checkout elements missing from page.");
+  if (!summary || !qtyInput || !payBtn) {
+    console.error("Required checkout elements missing.");
     return;
   }
 
-  if (productLine && title && pricePence) {
-    productLine.textContent =
-      `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
-  }
+  summary.textContent = `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
 
   payBtn.addEventListener("click", async () => {
-    const quantity = Number(quantityInput.value || 1);
+    const quantity = Number(qtyInput.value || 1);
 
     try {
       const res = await fetch("/api/create-checkout-session", {
@@ -75,16 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        console.error("Stripe response:", data);
+        console.error("Stripe error:", data);
         alert("Checkout failed. Please try again.");
       }
     } catch (err) {
       console.error("Network error:", err);
-      alert("Network error – please try again.");
+      alert("Network error. Please try again.");
     }
   });
 });
 </script>
+
 
 
 
