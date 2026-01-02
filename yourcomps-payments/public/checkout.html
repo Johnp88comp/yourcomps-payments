@@ -19,15 +19,12 @@
 
     <p id="summary"></p>
 
-    <label>Number of tickets</label>
+    <label for="qty">Number of tickets</label>
     <input id="qty" type="number" value="1" min="1" />
 
     <br><br>
 
-    <button
-      class="btn btn-primary"
-      onclick="startCheckout()"
-    >
+    <button id="payBtn" class="btn btn-primary">
       Continue to Stripe Payment
     </button>
 
@@ -40,51 +37,62 @@
 </main>
 
 <script>
-function startCheckout() {
+(() => {
+  console.log("Checkout script loaded");
+
   const params = new URLSearchParams(window.location.search);
-
   const title = params.get("title") || "Competition";
-  const pricePence = parseInt(params.get("pricePence"), 10) || 0;
-  const qty = Number(document.getElementById("qty").value || 1);
+  const pricePence = Number(params.get("pricePence"));
 
-  document.getElementById("summary").textContent =
+  const summary = document.getElementById("summary");
+  const qtyInput = document.getElementById("qty");
+  const payBtn = document.getElementById("payBtn");
+
+  if (!summary || !qtyInput || !payBtn) {
+    console.error("Required checkout elements missing");
+    return;
+  }
+
+  if (!pricePence || isNaN(pricePence)) {
+    summary.textContent = "Invalid or missing price.";
+    console.error("Invalid pricePence:", pricePence);
+    return;
+  }
+
+  summary.textContent =
     `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
 
-  fetch("/api/create-checkout-session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title,
-      price: pricePence,
-      quantity: qty
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
+  payBtn.addEventListener("click", async () => {
+    console.log("Pay button clicked");
+
+    const quantity = Number(qtyInput.value || 1);
+
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: title,
+          price: pricePence,   // backend expects `price` (pence)
+          quantity: quantity
+        })
+      });
+
+      console.log("API response status:", res.status);
+
+      const data = await res.json();
+      console.log("API response body:", data);
+
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Checkout failed. See console.");
-        console.error(data);
+        alert("Stripe did not return a checkout URL.");
       }
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Network error. Try again.");
-    });
-}
-
-// populate text on load
-(() => {
-  const params = new URLSearchParams(window.location.search);
-  const title = params.get("title") || "Competition";
-  const pricePence = parseInt(params.get("pricePence"), 10) || 0;
-
-  const summary = document.getElementById("summary");
-  if (summary) {
-    summary.textContent =
-      `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
-  }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Network or server error. See console.");
+    }
+  });
 })();
 </script>
 
