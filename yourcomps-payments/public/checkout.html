@@ -19,16 +19,21 @@
 
     <p id="summary"></p>
 
-    <label for="qty">Number of tickets</label>
-    <input id="qty" type="number" value="1" min="1" />
+    <form method="POST" action="/api/create-checkout-session">
+      <input type="hidden" name="title" id="titleField" />
+      <input type="hidden" name="price" id="priceField" />
 
-    <br><br>
+      <label>Number of tickets</label>
+      <input name="quantity" type="number" value="1" min="1" />
 
-    <button id="payBtn" class="btn btn-primary">
-      Continue to Stripe Payment
-    </button>
+      <br><br>
 
-    <br><br>
+      <button type="submit" class="btn btn-primary">
+        Continue to Stripe Payment
+      </button>
+    </form>
+
+    <br>
 
     <a href="https://yourcomps.vercel.app" class="btn btn-secondary">
       Back to YourComps
@@ -37,63 +42,15 @@
 </main>
 
 <script>
-(() => {
-  console.log("Checkout script loaded");
+const params = new URLSearchParams(window.location.search);
+const title = params.get("title") || "Competition";
+const pricePence = params.get("pricePence") || "0";
 
-  const params = new URLSearchParams(window.location.search);
-  const title = params.get("title") || "Competition";
-  const pricePence = Number(params.get("pricePence"));
+document.getElementById("summary").textContent =
+  `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
 
-  const summary = document.getElementById("summary");
-  const qtyInput = document.getElementById("qty");
-  const payBtn = document.getElementById("payBtn");
-
-  if (!summary || !qtyInput || !payBtn) {
-    console.error("Required checkout elements missing");
-    return;
-  }
-
-  if (!pricePence || isNaN(pricePence)) {
-    summary.textContent = "Invalid or missing price.";
-    console.error("Invalid pricePence:", pricePence);
-    return;
-  }
-
-  summary.textContent =
-    `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
-
-  payBtn.addEventListener("click", async () => {
-    console.log("Pay button clicked");
-
-    const quantity = Number(qtyInput.value || 1);
-
-    try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: title,
-          price: pricePence,   // backend expects `price` (pence)
-          quantity: quantity
-        })
-      });
-
-      console.log("API response status:", res.status);
-
-      const data = await res.json();
-      console.log("API response body:", data);
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Stripe did not return a checkout URL.");
-      }
-    } catch (err) {
-      console.error("Checkout error:", err);
-      alert("Network or server error. See console.");
-    }
-  });
-})();
+document.getElementById("titleField").value = title;
+document.getElementById("priceField").value = pricePence;
 </script>
 
 </body>
