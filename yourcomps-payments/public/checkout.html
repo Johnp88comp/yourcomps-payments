@@ -19,12 +19,12 @@
 
     <p id="summary"></p>
 
-    <form method="POST" action="/api/create-checkout-session">
-      <input type="hidden" name="title" id="titleField" />
-      <input type="hidden" name="price" id="priceField" />
+    <form method="GET" action="/api/create-checkout-session">
+      <input type="hidden" name="title" id="titleField">
+      <input type="hidden" name="price" id="priceField">
 
       <label>Number of tickets</label>
-      <input name="quantity" type="number" value="1" min="1" />
+      <input name="quantity" type="number" value="1" min="1">
 
       <br><br>
 

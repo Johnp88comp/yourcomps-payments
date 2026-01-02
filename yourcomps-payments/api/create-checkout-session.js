@@ -3,12 +3,8 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).send("Method Not Allowed");
-  }
-
   try {
-    const { title, price, quantity } = req.body;
+    const { title, price, quantity } = req.query;
 
     const unitAmount = Number(price);
     const qty = Number(quantity || 1);
@@ -36,8 +32,8 @@ export default async function handler(req, res) {
       cancel_url: "https://yourcomps.vercel.app/cancel.html"
     });
 
-    // 🔑 REDIRECT — no JS needed
-    res.writeHead(303, { Location: session.url });
+    // ✅ HARD REDIRECT TO STRIPE
+    res.writeHead(302, { Location: session.url });
     res.end();
 
   } catch (err) {
