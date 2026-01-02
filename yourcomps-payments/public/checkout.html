@@ -36,6 +36,7 @@
 </main>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
 
   const title = params.get("title");
@@ -43,37 +44,50 @@
 
   const productLine = document.getElementById("productLine");
   const payBtn = document.getElementById("payBtn");
+  const quantityInput = document.getElementById("quantity");
 
-  if (!title || !pricePence) {
-    productLine.innerText = "Missing product information.";
-  } else {
-    productLine.innerText =
-      `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
+  if (!productLine || !payBtn || !quantityInput) {
+    console.error("Required elements not found in DOM");
+    return;
   }
 
+  if (!title || !pricePence) {
+    productLine.textContent = "Missing product information.";
+    return;
+  }
+
+  productLine.textContent = `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
+
   payBtn.addEventListener("click", async () => {
-    const quantity = Number(document.getElementById("quantity").value);
+    const quantity = Number(quantityInput.value);
 
-    const res = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        price: pricePence,
-        quantity
-      })
-    });
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          price: pricePence,
+          quantity
+        })
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Checkout failed.");
-      console.error(data);
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Stripe error:", data);
+        alert("Checkout failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Network error:", err);
+      alert("Something went wrong. Please try again.");
     }
   });
+});
 </script>
+
 
 </body>
 </html>
