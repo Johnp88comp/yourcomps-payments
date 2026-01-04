@@ -19,21 +19,16 @@
 
     <p id="summary"></p>
 
-    <form method="GET" action="/api/create-checkout-session">
-      <input type="hidden" name="title" id="titleField">
-      <input type="hidden" name="price" id="priceField">
+    <label>Number of tickets</label>
+    <input id="quantity" type="number" value="1" min="1" />
 
-      <label>Number of tickets</label>
-      <input name="quantity" type="number" value="1" min="1">
+    <br><br>
 
-      <br><br>
+    <button id="payBtn" class="btn btn-primary">
+      Continue to Stripe Payment
+    </button>
 
-      <button type="submit" class="btn btn-primary">
-        Continue to Stripe Payment
-      </button>
-    </form>
-
-    <br>
+    <br><br>
 
     <a href="https://yourcomps.vercel.app" class="btn btn-secondary">
       Back to YourComps
@@ -42,16 +37,60 @@
 </main>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const title = params.get("title") || "Competition";
-const pricePence = params.get("pricePence") || "0";
+document.addEventListener("DOMContentLoaded", () => {
+  const payBtn = document.getElementById("payBtn");
+  const quantityInput = document.getElementById("quantity");
+  const summary = document.getElementById("summary");
 
-document.getElementById("summary").textContent =
-  `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
+  if (!payBtn) {
+    console.error("payBtn not found");
+    return;
+  }
 
-document.getElementById("titleField").value = title;
-document.getElementById("priceField").value = pricePence;
+  // 🔍 Prove the handler is attached
+  console.log("Checkout script loaded");
+
+  const params = new URLSearchParams(window.location.search);
+  const title = params.get("title") || "Competition Entry";
+  const pricePence = Number(params.get("pricePence")) || 200;
+
+  summary.textContent =
+    `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
+
+  payBtn.addEventListener("click", async () => {
+    alert("CLICK CONFIRMED"); // temporary – we remove this after
+
+    payBtn.disabled = true;
+    payBtn.textContent = "Redirecting to Stripe…";
+
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          price: pricePence,
+          quantity: Number(quantityInput.value || 1)
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || "Stripe error");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Checkout failed");
+      payBtn.disabled = false;
+      payBtn.textContent = "Continue to Stripe Payment";
+    }
+  });
+});
 </script>
+
 
 </body>
 </html>
