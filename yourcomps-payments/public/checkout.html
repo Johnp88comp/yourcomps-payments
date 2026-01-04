@@ -1,95 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Secure Checkout | YourComps</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <title>Checkout Test</title>
 </head>
-
 <body>
 
-<header class="site-header">
-  <h1 class="logo">YourComps</h1>
-</header>
-
-<main class="page-center">
-  <div class="card">
-    <h2>Secure Checkout</h2>
-
-    <!-- ✅ THIS ELEMENT MUST EXIST -->
-    <p id="summary"></p>
-
-    <label>Number of tickets</label>
-    <input id="quantity" type="number" value="1" min="1" />
-
-    <br><br>
-
-    <button id="payBtn" class="btn btn-primary">
-      Continue to Stripe Payment
-    </button>
-
-    <br><br>
-
-    <a href="https://yourcomps.vercel.app" class="btn btn-secondary">
-      Back to YourComps
-    </a>
-  </div>
-</main>
+<button id="payBtn">Pay Now</button>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Checkout script loaded");
+document.getElementById("payBtn").addEventListener("click", async () => {
+  alert("CLICK REGISTERED");
 
-  const summary = document.getElementById("summary");
-  const payBtn = document.getElementById("payBtn");
-  const quantityInput = document.getElementById("quantity");
-
-  if (!summary || !payBtn || !quantityInput) {
-    console.error("Checkout elements missing", {
-      summary,
-      payBtn,
-      quantityInput
-    });
-    return;
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  const title = params.get("title") || "Competition Entry";
-  const pricePence = Number(params.get("pricePence")) || 200;
-
-  summary.textContent =
-    `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
-
-  payBtn.addEventListener("click", async () => {
-    payBtn.disabled = true;
-    payBtn.textContent = "Redirecting to Stripe…";
-
-    try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          price: pricePence,
-          quantity: Number(quantityInput.value || 1)
-        })
-      });
-
-      const data = await res.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || "Stripe error");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Checkout failed. Please try again.");
-      payBtn.disabled = false;
-      payBtn.textContent = "Continue to Stripe Payment";
-    }
+  const res = await fetch("/api/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: "Test Entry",
+      price: 200,
+      quantity: 1
+    })
   });
+
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    alert("NO STRIPE URL");
+    console.log(data);
+  }
 });
 </script>
 
