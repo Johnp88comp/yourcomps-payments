@@ -10,35 +10,26 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Checkout script running");
+  console.log("Checkout JS loaded");
 
-  const summary = document.getElementById("summary");
   const payBtn = document.getElementById("payBtn");
-  const qtyInput = document.getElementById("qty");
 
-  if (!summary || !payBtn || !qtyInput) {
-    console.error("DOM mismatch", { summary, payBtn, qtyInput });
+  if (!payBtn) {
+    console.error("payBtn missing");
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  const title = params.get("title") || "Competition Entry";
-  const pricePence = Number(params.get("pricePence")) || 200;
-
-  summary.textContent =
-    `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
-
   payBtn.addEventListener("click", async () => {
-    alert("CLICK REGISTERED"); // temporary proof
+    alert("CLICK CONFIRMED");
 
     try {
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title,
-          price: pricePence,
-          quantity: Number(qtyInput.value || 1)
+          title: "Test Entry",
+          price: 200,
+          quantity: 1
         })
       });
 
