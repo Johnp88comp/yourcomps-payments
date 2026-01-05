@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const payBtn = document.getElementById("payBtn");
 
   if (!summary || !qtyInput || !payBtn) {
-    console.error("Missing DOM elements", { summary, qtyInput, payBtn });
+    console.error("Missing DOM elements");
     return;
   }
 
@@ -56,36 +56,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const title = params.get("title") || "Competition Entry";
   const pricePence = Number(params.get("pricePence")) || 200;
 
-  summary.textContent =
-    `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
+  summary.textContent = `${title} — £${(pricePence / 100).toFixed(2)} per ticket`;
 
   payBtn.addEventListener("click", async () => {
-    payBtn.disabled = true;
+    alert("CLICK CONFIRMED");
 
-    try {
-      const res = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          price: pricePence,
-          quantity: Number(qtyInput.value || 1)
-        })
-      });
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        price: pricePence,
+        quantity: Number(qtyInput.value || 1)
+      })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Stripe error");
-        console.log(data);
-        payBtn.disabled = false;
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Network error");
-      payBtn.disabled = false;
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Stripe error");
+      console.log(data);
     }
   });
 });
