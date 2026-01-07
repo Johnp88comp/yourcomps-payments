@@ -18,7 +18,7 @@ export default async function handler(req, res) {
             product_data: {
               name: "Test Checkout",
             },
-            unit_amount: 200, // £2.00
+            unit_amount: 200,
           },
           quantity: 1,
         },
@@ -29,7 +29,6 @@ export default async function handler(req, res) {
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Stripe session failed" });
+    res.status(500).json({ error: err.message });
   }
 }
